@@ -16,7 +16,7 @@
       #   Name: "roboshop-{{ item }}"
       state: present
     loop: "{{ instances }}"
-    when: action == create
+    when: action == "create"
     # register: ec2_instance_output
     # tags: create
 
