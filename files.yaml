@@ -9,6 +9,7 @@ instances:
 - shipping
 - payment
 - frontend
+action: create
 # subnet_id: subnet-0b333d5aab9ea94ad
 instance_type: t3.micro
 sg_id: 
