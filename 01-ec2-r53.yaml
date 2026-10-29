@@ -9,7 +9,7 @@
       name: "roboshop-{{ item }}"
       # vpc_subnet_id: "{{ subnet_id }}"
       instance_type: "{{ instance_type }}"
-      security_group: "{{ sg_id }}"
+      security_group: "roboshop-{{ item }}"
       region: us-east-1
       image_id: "{{ image_id }}"
       # tags:
