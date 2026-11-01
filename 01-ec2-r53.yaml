@@ -12,13 +12,13 @@
       security_group: "roboshop-{{ item }}"
       region: us-east-1
       image_id: "{{ image_id }}"
-      # tags:
-      #   Name: "roboshop-{{ item }}"
+      tags:
+        Name: "roboshop-{{ item }}"
       state: present
     loop: "{{ instances }}"
     when: action == "create"
     register: ec2_instance_output
-    # tags: create
+    tags: create
 
   # - name: print ec2 creation output
   #   debug:
@@ -47,8 +47,8 @@
           {% endif %}
         {% endfor %}
         {{ r }}
-    # tags: create
-      when: action == "create"
+    tags: create
+      # when: action == "create"
 
   - name: Terminate EC2 instances
     amazon.aws.ec2_instance:
@@ -57,5 +57,5 @@
       state: absent
       wait: yes
     loop: "{{ instances }}"
-    # tags: destroy
-    when: action == "delete"
+    tags: destroy
+    # when: action == "delete"
