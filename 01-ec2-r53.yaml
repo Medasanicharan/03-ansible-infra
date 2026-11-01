@@ -12,28 +12,28 @@
       security_group: "roboshop-{{ item }}"
       region: us-east-1
       image_id: "{{ image_id }}"
-      # tags:
-      #   Name: "roboshop-{{ item }}"
+      tags:
+        Name: "roboshop-{{ item }}"
       state: present
     loop: "{{ instances }}"
     when: action == "create"
     register: ec2_instance_output
-    # tags: create
+    tags: create
 
-  - name: print ec2 creation output
-    debug:
-      msg: "{{ ec2_instance_output }}"
+  # - name: print ec2 creation output
+  #   debug:
+  #     msg: "{{ ec2_instance_output }}"
 
-  # - name: Create Route53 records
-  #   amazon.aws.route53:
-  #     state: present
-  #     zone: "{{ zone_name }}"
-  #     record: "{{ item.record }}"
-  #     type: A
-  #     ttl: 1
-  #     value: "{{ item.value }}"
-  #     overwrite: true
-  #   loop: "{{ records | from_yaml }}"
+  - name: Create Route53 records
+    amazon.aws.route53:
+      state: present
+      zone: "{{ zone_name }}"
+      record: "{{ item.record }}"
+      type: A
+      ttl: 1
+      value: "{{ item.value }}"
+      overwrite: true
+    loop: "{{ records | from_yaml }}"
   #   vars:
   #     records: >
   #       {% set r = [] %}
@@ -47,7 +47,7 @@
   #         {% endif %}
   #       {% endfor %}
   #       {{ r }}
-  #   tags: create
+    tags: create
 
   # - name: Terminate EC2 instances
   #   amazon.aws.ec2_instance:
