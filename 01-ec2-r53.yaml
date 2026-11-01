@@ -17,8 +17,12 @@
       state: present
     loop: "{{ instances }}"
     when: action == "create"
-    # register: ec2_instance_output
+    register: ec2_instance_output
     # tags: create
+
+  - name: print ec2 creation output
+    debug:
+      msg: "{{ ec2_instance_output }}"
 
   # - name: Create Route53 records
   #   amazon.aws.route53:
